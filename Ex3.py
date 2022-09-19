@@ -30,12 +30,12 @@ class Solution(object):
                    #print("brekkato")
                    break
                #print(current_string)
-           print(current_len)
-           print("all iterazioine {} la lunghezza della stringa migliore è {}".format(i, best_len))
+           #print(current_len)
+           #print("all iterazioine {} la lunghezza della stringa migliore è {}".format(i, best_len))
            if current_len>best_len:
                best_string = current_string
                best_len = current_len
-               print(best_string)
+               #print(best_string)
            #print("----------------------------------------------------------")
         return best_len
 
