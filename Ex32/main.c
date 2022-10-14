@@ -9,8 +9,9 @@ int longestValidParentheses(char *s){
         int len = 0;
         count_open = 0;
         count_close = 0;
-        if (s[i] == '(')
-            count_open++;
+        if (s[i] == '('){
+            len++;
+            count_open++;}
         else
             continue;
         for(int j=i+1; j<strlen(s); j++){
@@ -33,8 +34,10 @@ int longestValidParentheses(char *s){
     return best_len;
 }
 
+
+
 int main(void){
-    char* s = "(()()()()))";
+    char* s = "((((((((((((((((()";
     printf("\n\n\n%d", longestValidParentheses(s));
     return 0;
 }
