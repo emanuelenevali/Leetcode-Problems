@@ -1,72 +1,78 @@
-    # class Node:
-    #     def __init__(self, val):
-    #         self.val = val
-    #         self.next = None
+# design of a linked list
 
+# MyLinkedList() Initializes the MyLinkedList object.
 
-    # class MyLinkedList(object):
-    #     def __init__(self):
-    #         self.head = None
-    #         self.size = 0
+# int get(int index) Get the value of the indexth node in the linked list. If the index is invalid, return -1.
 
-    #     def get(self, index: int) -> int:
-    #         if index < 0 or index >= self.size:
-    #             return -1
+# void addAtHead(int val) Add a node of value val before the first element of the linked list. After the insertion, 
+# the new node will be the first node of the linked list.
 
-    #         current = self.head
+# void addAtTail(int val) Append a node of value val as the last element of the linked list.
 
-    #         for _ in range(0, index):
-    #             current = current.next
+# void addAtIndex(int index, int val) Add a node of value val before the indexth node in the linked list. 
+# If index equals the length of the linked list, the node will be appended to the end of the linked list. 
+# If index is greater than the length, the node will not be inserted.
 
-    #         return current.val
+# void deleteAtIndex(int index) Delete the indexth node in the linked list, if the index is valid.
 
-    #     def addAtHead(self, val: int) -> None:
-    #         new_node=Node(val)
-    #         new_node.next=self.head
-    #         self.head=new_node
-    #         self.size+=1
+class Node:
+    # Node of a single linked list
+    def __init__(self, val):
+        self.val=val
+        self.next=None
 
-    #     def addAtTail(self, val: int) -> None:
-    #         curr = self.head
-    #         if curr is None:
-    #             self.head = Node(val)
-    #         else:
-    #             while curr.next is not None:
-    #                 curr = curr.next
-    #             curr.next = Node(val)
+class MyLinkedList:
 
-    #         self.size += 1
-                
-            
+    def __init__(self):
+        self.head=None
+        self.size=0
+        
 
-    #     def addAtIndex(self, index: int, val: int) -> None:
-    #         if index>self.size or index<0:
-    #             pass
-    #         if index==self.size:
-    #             self.addAtTail(val)
-    #         else:
-    #             while(index>0):
-    #                 self.head=self.head.next
-    #                 index-=1
-    #             self.addAtHead(val)
+    def get(self, index: int) -> int:
+        if index<0 or index>=self.size:
+            return -1
+        curr=self.head
+        for i in range(0, index):
+            curr=curr.next
+        return curr.val
+               
 
-    #     def deleteAtIndex(self, index: int) -> None:
-    #         if index>=self.size or index<0:
-    #             pass
-    #         prev=self.head 
-    #         curr=self.head
-    #         while(index>0):
-    #             prev=curr
-    #             curr=curr.next
-    #             index-=1
-    #         prev.next=curr.next
-            
+    def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0,val)
 
+    def addAtTail(self, val: int) -> None:
+        self.addAtIndex(self.size,val)
+        
 
-    # # Your MyLinkedList object will be instantiated and called as such:
-    # # obj = MyLinkedList()
-    # # param_1 = obj.get(index)
-    # # obj.addAtHead(val)
-    # # obj.addAtTail(val)
-    # # obj.addAtIndex(index,val)
-    # # obj.deleteAtIndex(index)
+    def addAtIndex(self, index: int, val: int) -> None:
+        if index>self.size:
+            return
+        curr=self.head
+        new_node=Node(val)
+        if index==0:
+            new_node.next=curr
+            self.head=new_node
+        else:
+            for _ in range(index-1):
+                curr=curr.next
+            new_node.next=curr.next
+            curr.next=new_node
+        
+        self.size+=1
+        
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.size:
+            return
+
+        curr=self.head
+        if curr == None:
+            return
+        if index == 0:
+            self.head = self.head.next
+        else:
+            for _ in range(0, index-1):
+                curr = curr.next
+            curr.next = curr.next.next
+
+        self.size-=1
